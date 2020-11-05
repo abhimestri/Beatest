@@ -1,12 +1,16 @@
 import React,{ Component } from 'react';
-// import classes from './App.module.css';
+import classes from './App.module.css';
 import  { connect } from 'react-redux'
 import HomePage from './container/HomePage/HomePage'
+import Header from './container/Header/header'
 
 class App extends Component{
   render(){
     return (
-      <HomePage/>
+      <div>
+        <Header/>
+        <HomePage/>
+      </div>
     );
   }
 }

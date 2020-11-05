@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from './HomePage.module.css'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import MovieTitleCard from '../../components/HomePage/MovieTitleCard'
 
 class HomePage extends Component{
 
@@ -17,10 +18,19 @@ class HomePage extends Component{
             .catch(err => console.log(err))
     }
     render(){
+        let result = this.state.movieList.map(res => {
+            console.log(res)
+            return (
+                <MovieTitleCard
+                    title = {res.title}
+                    img = {res.poster_path}
+            />
+            )
+        })
         return(
-            <div>{ 
-                this.state.movieList.map(res => res.title)    
-            }</div>
+            <div>
+                <div className={classes.gridContainer}>{result}</div>
+            </div>  
         )
     }
 }

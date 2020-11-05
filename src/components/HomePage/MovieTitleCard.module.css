@@ -1,0 +1,31 @@
+.container{
+    width: 230px;
+    height: auto;
+    box-shadow: 0 0 20px rgb(100, 100, 100);
+    margin: 20px 20px 20px 30px;
+    transition: all ease-in-out 0.3s;
+    height: 460px;
+}
+.container:hover{
+    box-shadow: 0 0 30px rgb(53, 52, 52);
+}
+.img{
+    width: 230px;
+}
+.title{
+    text-align: center;
+}
+.addToFavorites{
+    margin: 0 20px;
+    height: 40px;
+    width: 85%;
+    background-color: #fff;
+    color: #000;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+    border: 1px solid #000;
+}
+.addToFavorites:hover{
+    background-color: #000;
+    color: #fff;
+}
