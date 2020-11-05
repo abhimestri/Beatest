@@ -1,0 +1,33 @@
+.Container{
+    width: 30%;
+    height: 400px;
+    position: absolute;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid #000;
+}
+.title{
+    margin: 20px;
+}
+label{
+    margin: 20px;
+}
+input{
+    width: 90%;
+    margin: 10px 20px;
+    height: 30px;
+}
+.signInBtn{
+    width: 90%;
+    height: 40px;
+    margin: 20px;
+}
+.signUpOption{
+    text-align: center;
+}
+.signUpBtn{
+    width: 80%;
+    height: 40px;
+    margin: 0 40px;
+}

@@ -1,12 +1,13 @@
+import * as actionTypes from './action'
 const initialState = {
-    name : "Abhishek"
+    movieList : []
 }
 
 const reducer = (state = initialState , action) => {
-    if(action.type === "ABHI"){
+    if(action.type === actionTypes.ADD_TO_FAVORITES){
         return {
             ...state,
-            name : action.name
+            movieList : state.movieList.concat(action.favorites)
         }
     }
     return state

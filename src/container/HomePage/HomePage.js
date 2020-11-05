@@ -3,6 +3,7 @@ import classes from './HomePage.module.css'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import MovieTitleCard from '../../components/HomePage/MovieTitleCard'
+import * as actionType from '../../store/action'
 
 class HomePage extends Component{
 
@@ -17,11 +18,25 @@ class HomePage extends Component{
             })
             .catch(err => console.log(err))
     }
+
+    storeToFavorites = (data) => {
+        let datas = {
+            name : data.title,
+            img : data.poster_path
+        }
+        axios.post('https://sample-221133.firebaseio.com/fav.json',datas)
+                .then(res => {
+                    this.props.onGetFavorites(datas)
+                })
+                .catch(err => console.log(err))
+    }
+
     render(){
         let result = this.state.movieList.map(res => {
             console.log(res)
             return (
                 <MovieTitleCard
+                    clicked = {() => this.storeToFavorites(res)}
                     title = {res.title}
                     img = {res.poster_path}
             />
@@ -37,7 +52,7 @@ class HomePage extends Component{
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetName : name => dispatch({ type:"ABHI",name:name })
+        onGetFavorites : favorites => dispatch({ type:actionType.ADD_TO_FAVORITES, favorites:favorites})
     }
 }
 
