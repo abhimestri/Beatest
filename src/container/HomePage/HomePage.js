@@ -27,6 +27,7 @@ class HomePage extends Component{
         axios.post('https://sample-221133.firebaseio.com/fav.json',datas)
                 .then(res => {
                     this.props.onGetFavorites(datas)
+                    alert("successfully added to favorites")
                 })
                 .catch(err => console.log(err))
     }
