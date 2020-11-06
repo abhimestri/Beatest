@@ -22,12 +22,17 @@ class HomePage extends Component{
             name : data.title,
             img : data.poster_path
         }
-        axios.post('https://sample-221133.firebaseio.com/fav.json',datas)
+        let id = localStorage.getItem('idToken')
+        if(id === null){
+            alert("your are not signed in please sign in")
+        }else{
+            axios.post('https://sample-221133.firebaseio.com/fav.json',datas)
                 .then(res => {
                     alert("successfully added to favorites")
                 })
                 .catch(err => console.log(err))
-    }
+        }
+    }   
 
     render(){
         let result = this.state.movieList.map(res => {
