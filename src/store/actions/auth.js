@@ -1,4 +1,4 @@
-import Axios from 'axios'
+import axios from 'axios'
 import * as actionTypes from './actionTypes'
 
 export const signIn = (data) => {
@@ -8,17 +8,19 @@ export const signIn = (data) => {
     }
 }
 
-const authHandler = (token ,time ) => {
-    setTimeout(() => {
-        localStorage.removeItem('idToken')
-        localStorage.removeItem('expirationTime')
-    },time*1000)
-}
+export const logout = () => {
+    localStorage.removeItem('idToken')
+    localStorage.removeItem('expirationTime')
+    return {
+        type : actionTypes.AUTH_LOGOUT
+    }
+} 
 
-export const signUp = (token) => {
-    return { 
-        type : actionTypes.IS_SIGNED_UP,
-        token : token
+export const authHandler = (token ,time ) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logout())
+        } , time * 1000)
     }
 }
 
@@ -35,16 +37,17 @@ export const auth = (email ,password, isSignedIn) => {
         }else{
             url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCNXVWZi7uvu8J-Y34ZndPXJbMqYwXFDlc"
         }
-        console.log(url)
-        Axios.post(url, authData)
-                .then(res => {
-                    dispatch(signIn(res.data))
-                    localStorage.setItem('idToken' , res.data.idToken)
-                    localStorage.setItem('expirationTime' , res.data.expiresIn)
+        axios.post(url, authData)
+                .then(response => {
+                    console.log(response)
+                    dispatch(signIn(response.data))
+                    localStorage.setItem('idToken' , response.data.idToken)
+                    localStorage.setItem('expirationTime' , response.data.expiresIn)
                     dispatch(authHandler(localStorage.getItem('idToken'), localStorage.getItem('expirationTime')))
+                    alert("Successful")
                 })
                 .catch(error => {
-                    alert(error.message)
+                    alert(error.response.data.error.message)
                 })
     }
 }

@@ -1,2 +1,2 @@
 export const IS_SIGNED_IN = "IS_SIGNED_IN"
-export const IS_SIGNED_UP = "IS_SIGNED_UP"
+export const AUTH_LOGOUT = "AUTH_LOGOUT"
