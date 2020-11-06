@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import classes from './favorites.module.css'
 import FavoritesCard from '../../components/Favorites/FavoritesCard'
 import Axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 class Favorites extends Component{
     state = {
@@ -26,6 +27,15 @@ class Favorites extends Component{
                 })
                 .catch(err => console.log(err))
     }
+
+    // componentDidMount(){
+    //     if(localStorage.getItem('idToken')){
+    //         this.props.history.push('/favorites')
+    //     }else{
+    //         this.props.history.push('/signin')
+    //     }
+    // }
+    
     render(){
         let res = this.state.listOfFavoriteMovies.map(el =>  {
             return (<FavoritesCard
@@ -35,9 +45,14 @@ class Favorites extends Component{
             />)
         })
         return ( 
-            <div className={classes.Container}>{res}</div>
+            <div className={classes.Container}>{ localStorage.getItem('idToken') ? res : 
+            <div className={classes.notSignedInBlock}>
+                <p className={classes.notSignedIn}>You Are Not Signed In</p>
+                <button onClick={() => {this.props.history.push('/signin')}}>Sign In</button>
+            </div>
+            }</div>
         )
     }
 }
 
-export default Favorites
+export default withRouter(Favorites)

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import classes from './HomePage.module.css'
-import { connect } from 'react-redux'
 import axios from 'axios'
 import MovieTitleCard from '../../components/HomePage/MovieTitleCard'
-import * as actionType from '../../store/action'
 
 class HomePage extends Component{
 
@@ -26,7 +24,6 @@ class HomePage extends Component{
         }
         axios.post('https://sample-221133.firebaseio.com/fav.json',datas)
                 .then(res => {
-                    this.props.onGetFavorites(datas)
                     alert("successfully added to favorites")
                 })
                 .catch(err => console.log(err))
@@ -51,10 +48,5 @@ class HomePage extends Component{
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onGetFavorites : favorites => dispatch({ type:actionType.ADD_TO_FAVORITES, favorites:favorites})
-    }
-}
 
-export default connect(null,mapDispatchToProps)(HomePage)
+export default HomePage
