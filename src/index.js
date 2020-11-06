@@ -10,9 +10,17 @@ import reducer from './store/reducer/auth'
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const logger  = store => {
+  return next => {
+    return action => {
+      const result  = next(action)
+      return result
+    }
+  }
+}
 
 const store = createStore(reducer , composeEnhancers(
-  applyMiddleware(thunk)
+  applyMiddleware(logger,thunk)
 ))
 
 ReactDOM.render(

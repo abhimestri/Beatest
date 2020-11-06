@@ -38,12 +38,13 @@ export const auth = (email ,password, isSignedIn) => {
         console.log(url)
         Axios.post(url, authData)
                 .then(res => {
-                    console.log(res)
                     dispatch(signIn(res.data))
                     localStorage.setItem('idToken' , res.data.idToken)
                     localStorage.setItem('expirationTime' , res.data.expiresIn)
                     dispatch(authHandler(localStorage.getItem('idToken'), localStorage.getItem('expirationTime')))
                 })
-                .catch(err => console.log(err))
+                .catch(error => {
+                    alert(error.message)
+                })
     }
 }
